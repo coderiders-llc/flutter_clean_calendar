@@ -75,17 +75,16 @@ class _CalendarScreenState extends State<CalendarScreen> {
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             Container(
-              child: Calendar(
+              child: CalendarLess(
+                context: context,
                 startOnMonday: true,
                 weekDays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-                events: _events,
                 onRangeSelected: (range) =>
                     print("Range is ${range.from}, ${range.to}"),
                 onDateSelected: (date) => _handleNewDate(date),
                 eventDoneColor: Colors.green,
                 selectedColor: Colors.pink,
                 todayColor: Colors.yellow,
-                isExpandable: true,
                 eventColor: Colors.grey,
                 dayOfWeekStyle: TextStyle(
                     color: Colors.green,
