@@ -17,9 +17,10 @@ class CalendarTile extends StatelessWidget {
   final Color todayColor;
   final Color eventColor;
   final Color eventDoneColor;
+  final Color inMonthDayColor;
 
   CalendarTile({
-    this.onDateSelected,
+    this.onDateSelected: null,
     this.date,
     this.child,
     this.dateStyles,
@@ -28,11 +29,12 @@ class CalendarTile extends StatelessWidget {
     this.isDayOfWeek: false,
     this.isSelected: false,
     this.inMonth: true,
-    this.events,
+    this.events = null,
     this.selectedColor,
     this.todayColor,
     this.eventColor,
     this.eventDoneColor,
+    this.inMonthDayColor,
   });
 
   Widget renderDateOrDayOfWeek(BuildContext context) {
@@ -49,7 +51,13 @@ class CalendarTile extends StatelessWidget {
     } else {
       int eventCount = 0;
       return InkWell(
-        onTap: onDateSelected,
+        onTap: () {
+          if(onDateSelected == null) {
+            return;
+          }
+
+          onDateSelected();
+        },
         child: Padding(
           padding: const EdgeInsets.all(1.0),
           child: Container(
@@ -76,7 +84,7 @@ class CalendarTile extends StatelessWidget {
                           ? Colors.white
                           : Utils.isSameDay(this.date, DateTime.now())
                               ? todayColor
-                              : inMonth ? Colors.black : Colors.grey),
+                              : inMonth ? inMonthDayColor : Colors.grey),
                 ),
                 events != null && events.length > 0
                     ? Row(
@@ -112,7 +120,12 @@ class CalendarTile extends StatelessWidget {
     if (child != null) {
       return new InkWell(
         child: child,
-        onTap: onDateSelected,
+        onTap: () {
+          if(onDateSelected == null){
+            return;
+          }
+          onDateSelected();
+        },
       );
     }
     return new Container(

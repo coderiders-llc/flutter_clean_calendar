@@ -38,6 +38,9 @@ class Calendar extends StatefulWidget {
   final TextStyle bottomBarTextStyle;
   final Color bottomBarArrowColor;
   final Color bottomBarColor;
+  final Color inMonthDayColor;
+  final Color todayIconColor;
+  final Color displayMonthColor;
 
   Calendar({
     this.onMonthChanged,
@@ -62,6 +65,9 @@ class Calendar extends StatefulWidget {
     this.bottomBarTextStyle,
     this.bottomBarArrowColor,
     this.bottomBarColor,
+    this.inMonthDayColor,
+    this.todayIconColor = Colors.black,
+    this.displayMonthColor = Colors.black,
   });
 
   @override
@@ -115,7 +121,9 @@ class _CalendarState extends State<Calendar> {
 
     if (!widget.hideTodayIcon) {
       todayIcon = InkWell(
-        child: Text('Today'),
+        child: Text('Today', style: TextStyle(
+          color: widget.todayIconColor
+        ),),
         onTap: resetToToday,
       );
     } else {
@@ -133,6 +141,7 @@ class _CalendarState extends State<Calendar> {
               displayMonth,
               style: TextStyle(
                 fontSize: 20.0,
+                color: widget.displayMonthColor
               ),
             ),
           ],
@@ -183,6 +192,7 @@ class _CalendarState extends State<Calendar> {
             events: widget.events[day],
             isDayOfWeek: true,
             dayOfWeek: day,
+            inMonthDayColor: widget.inMonthDayColor,
             dayOfWeekStyle: widget.dayOfWeekStyle ??
                 TextStyle(
                   color: widget.selectedColor,
@@ -218,6 +228,7 @@ class _CalendarState extends State<Calendar> {
               selectedColor: widget.selectedColor,
               todayColor: widget.todayColor,
               eventColor: widget.eventColor,
+              inMonthDayColor: widget.inMonthDayColor,
               eventDoneColor: widget.eventDoneColor,
               events: widget.events[day],
               child: this.widget.dayBuilder(context, day),
@@ -231,6 +242,7 @@ class _CalendarState extends State<Calendar> {
                 selectedColor: widget.selectedColor,
                 todayColor: widget.todayColor,
                 eventColor: widget.eventColor,
+                inMonthDayColor: widget.inMonthDayColor,
                 eventDoneColor: widget.eventDoneColor,
                 events: widget.events[day],
                 onDateSelected: () => handleSelectedDateAndUserCallback(day),

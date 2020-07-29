@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_calendar/flutter_clean_calendar.dart';
+import 'package:flutter_clean_calendar/flutter_clean_calendar_less.dart';
 
 void main() => runApp(MyApp());
 
@@ -34,28 +35,28 @@ class _CalendarScreenState extends State<CalendarScreen> {
   DateTime _selectedDay;
 
   final Map<DateTime, List> _events = {
-    DateTime(2020, 5, 7): [
+    DateTime(2020, 7, 7): [
       {'name': 'Event A', 'isDone': true},
     ],
-    DateTime(2020, 5, 9): [
-      {'name': 'Event A', 'isDone': true},
-      {'name': 'Event B', 'isDone': true},
-    ],
-    DateTime(2020, 5, 10): [
+    DateTime(2020, 7, 9): [
       {'name': 'Event A', 'isDone': true},
       {'name': 'Event B', 'isDone': true},
     ],
-    DateTime(2020, 5, 13): [
+    DateTime(2020, 7, 10): [
       {'name': 'Event A', 'isDone': true},
       {'name': 'Event B', 'isDone': true},
-      {'name': 'Event C', 'isDone': false},
     ],
-    DateTime(2020, 5, 25): [
+    DateTime(2020, 7, 13): [
       {'name': 'Event A', 'isDone': true},
       {'name': 'Event B', 'isDone': true},
       {'name': 'Event C', 'isDone': false},
     ],
-    DateTime(2020, 6, 6): [
+    DateTime(2020, 7, 25): [
+      {'name': 'Event A', 'isDone': true},
+      {'name': 'Event B', 'isDone': true},
+      {'name': 'Event C', 'isDone': false},
+    ],
+    DateTime(2020, 7, 6): [
       {'name': 'Event A', 'isDone': false},
     ],
   };
@@ -81,15 +82,18 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 onRangeSelected: (range) =>
                     print("Range is ${range.from}, ${range.to}"),
                 onDateSelected: (date) => _handleNewDate(date),
-                isExpandable: true,
                 eventDoneColor: Colors.green,
                 selectedColor: Colors.pink,
                 todayColor: Colors.yellow,
+                isExpandable: true,
                 eventColor: Colors.grey,
                 dayOfWeekStyle: TextStyle(
-                    color: Colors.black,
+                    color: Colors.green,
                     fontWeight: FontWeight.w800,
                     fontSize: 11),
+                inMonthDayColor: Colors.green,
+                todayIconColor: Colors.green,
+                displayMonthColor: Colors.green,
               ),
             ),
             _buildEventList()
